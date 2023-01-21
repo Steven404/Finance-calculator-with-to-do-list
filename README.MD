@@ -1,4 +1,6 @@
-##Getting started##
+# Finance calculator with to-do list
+
+## Getting started
 
 Before running the project localy, you need to install the expo webpack config using the command `npx expo install @expo/webpack-config@^0.17.2`
 

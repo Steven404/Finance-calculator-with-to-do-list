@@ -1,22 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { colors } from "../../theme";
 
-import Onboarding from "./components/onboarding/Onboarding";
-
-export default function App() {
+const Onboarding = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Onboarding />
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.bgColor,
     alignItems: "center",
     justifyContent: "center",
   },
 });
+
+export default Onboarding;

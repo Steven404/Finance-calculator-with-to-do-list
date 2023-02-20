@@ -16,14 +16,7 @@ export interface IconPropsType {
 }
 
 const Icon = ({ image, size, onPress }: IconPropsType): JSX.Element => {
-  return (
-    <TouchableHighlight onPress={onPress}>
-      <Image
-        style={{ height: iconSize[size], width: iconSize[size] }}
-        source={availableIcons[image]}
-      />
-    </TouchableHighlight>
-  );
+  return <Image style={{ flex: 0.7 }} source={availableIcons[image]} />;
 };
 
 export default Icon;

@@ -7,7 +7,7 @@ export const colors = {
   darkBlue: "#2751B0",
 };
 
-export const metricsSize = {
+export const spacing = {
   xs: 2,
   sm: 4,
   md: 8,
@@ -18,12 +18,22 @@ export const metricsSize = {
   xxxxl: 32,
 };
 
+export const fontSize = {
+  xs: 8,
+  sm: 10,
+  md: 12,
+  lg: 16,
+  xl: 20,
+  xxl: 24,
+  xxxl: 28,
+};
+
 export const iconSize = {
-  xs: 20,
-  sm: 35,
-  md: 50,
-  xl: 65,
-  xxl: 80,
-  xxxl: 100,
-  xxxxl: 120,
+  xs: 50,
+  sm: 80,
+  md: 110,
+  xl: 140,
+  xxl: 170,
+  xxxl: 200,
+  xxxxl: 230,
 };

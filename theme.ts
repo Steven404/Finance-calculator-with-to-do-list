@@ -27,13 +27,3 @@ export const fontSize = {
   xxl: 24,
   xxxl: 28,
 };
-
-export const iconSize = {
-  xs: 50,
-  sm: 80,
-  md: 110,
-  xl: 140,
-  xxl: 170,
-  xxxl: 200,
-  xxxxl: 230,
-};

@@ -1,20 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { colors, fontSize, spacing } from "../../theme";
-import Icon, { ImageType } from "../image/Icon";
-import PersonalCalculator from "../../assets/images/piggy_bank.svg";
+import PersonalCalculator from "../../assets/images/personal_calculator.svg";
+import PiggyBank from "../../assets/images/piggy_bank.svg";
+import Icon, { IconType } from "../image/Icon";
 
 export interface OnboardingItemType {
   id: number;
   title: string;
   description: string;
-  image?: ImageType;
+  icon: IconType;
+}
+
+interface OnboardingItemPropsType extends OnboardingItemType {
   width: number;
   height: number;
 }
@@ -23,16 +20,16 @@ const OnboardingItem = ({
   id,
   title,
   description,
-  image,
+  icon,
   width,
   height,
-}: OnboardingItemType): JSX.Element => {
+}: OnboardingItemPropsType): JSX.Element => {
   return (
-    <View style={[styles.container, { width }, { height }]}>
-      <View style={{ height: height * 0.7 }}>
-        <PersonalCalculator width={width * 0.8} />
+    <View style={[styles.container, { width }]}>
+      <View style={{ flex: 0.7, justifyContent: "center" }}>
+        <Icon icon={icon} size={width * 0.7} />
       </View>
-      <View style={[styles.textWrapper, { height: height * 0.3 }]}>
+      <View style={[styles.textWrapper, { flex: 0.3 }]}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
@@ -42,6 +39,7 @@ const OnboardingItem = ({
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -55,6 +53,7 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
   },
   description: {
+    textAlign: "center",
     fontSize: fontSize.md,
     marginTop: spacing.xxl,
     paddingHorizontal: spacing.xxxxl,

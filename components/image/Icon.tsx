@@ -1,22 +1,28 @@
-import { Image, TouchableHighlight } from "react-native";
-import { iconSize } from "../../theme";
+import PersonalCalculator from "../../assets/images/personal_calculator.svg";
+import PersonalFinance from "../../assets/images/personal_finance.svg";
+import PiggyBank from "../../assets/images/piggy_bank.svg";
+import TimeManagement from "../../assets/images/time_management.svg";
+import Wallet from "../../assets/images/wallet.svg";
 
-const availableIcons = {
-  personalCalculator: require("../../assets/images/personal_calculator.svg"),
-  personalFinance: require("../../assets/images/personal_finance.svg"),
-  piggyBank: require("../../assets/images/piggy_bank.svg"),
+const availabeIcons = {
+  PersonalCalculator,
+  PersonalFinance,
+  PiggyBank,
+  TimeManagement,
+  Wallet,
 };
 
-export type ImageType = keyof typeof availableIcons;
+export type IconType = keyof typeof availabeIcons;
 
 export interface IconPropsType {
-  image: ImageType;
-  size: keyof typeof iconSize;
+  icon: IconType;
+  size: number;
   onPress?: () => void;
 }
 
-const Icon = ({ image, size, onPress }: IconPropsType): JSX.Element => {
-  return <Image style={{ flex: 0.7 }} source={availableIcons[image]} />;
+const Icon = ({ icon, size, onPress }: IconPropsType): JSX.Element => {
+  const I = availabeIcons[icon];
+  return <I width={size} height={size} />;
 };
 
 export default Icon;

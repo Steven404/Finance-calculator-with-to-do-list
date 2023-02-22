@@ -6,7 +6,7 @@ import Onboarding from "./screens/Onboarding";
 export default function App() {
   const { height, width } = useWindowDimensions();
   return (
-    <View style={[styles.container, { height }, { width }]}>
+    <View style={[styles.container]}>
       <Onboarding />
       <StatusBar style="auto" />
     </View>
@@ -15,6 +15,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",

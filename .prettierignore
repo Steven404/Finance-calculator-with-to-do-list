@@ -4,3 +4,5 @@ Pods/
 
 example/android/app/build/
 example/ios/build/
+
+.eslintrc.js

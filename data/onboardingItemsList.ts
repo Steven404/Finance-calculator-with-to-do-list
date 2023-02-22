@@ -14,4 +14,11 @@ export const onboardingScreens: Array<OnboardingItemType> = [
     description: "Categorize your daily activities and set reminders for them",
     icon: "TimeManagement",
   },
+  {
+    id: 3,
+    title: "Lorem ipsum",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: "PiggyBank",
+  },
 ];

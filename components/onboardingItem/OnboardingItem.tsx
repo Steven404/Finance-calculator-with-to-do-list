@@ -13,7 +13,6 @@ export interface OnboardingItemType {
 
 interface OnboardingItemPropsType extends OnboardingItemType {
   width: number;
-  height: number;
 }
 
 const OnboardingItem = ({
@@ -22,14 +21,13 @@ const OnboardingItem = ({
   description,
   icon,
   width,
-  height,
 }: OnboardingItemPropsType): JSX.Element => {
   return (
     <View style={[styles.container, { width }]}>
-      <View style={{ flex: 0.7, justifyContent: "center" }}>
-        <Icon icon={icon} size={width * 0.7} />
+      <View style={{ flex: 0.8, justifyContent: "center", marginTop: 50 }}>
+        <Icon icon={icon} size={width * 0.8} />
       </View>
-      <View style={[styles.textWrapper, { flex: 0.3 }]}>
+      <View style={[styles.textWrapper, { flex: 0.2 }]}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>

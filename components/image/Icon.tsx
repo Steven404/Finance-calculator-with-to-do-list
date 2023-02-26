@@ -3,6 +3,9 @@ import PersonalFinance from "../../assets/images/personal_finance.svg";
 import PiggyBank from "../../assets/images/piggy_bank.svg";
 import TimeManagement from "../../assets/images/time_management.svg";
 import Wallet from "../../assets/images/wallet.svg";
+import WorkingLate from "../../assets/images/working_late.svg";
+import Programming from "../../assets/images/programming.svg";
+import ReadingTime from "../../assets/images/reading_time.svg";
 
 const availabeIcons = {
   PersonalCalculator,
@@ -10,6 +13,9 @@ const availabeIcons = {
   PiggyBank,
   TimeManagement,
   Wallet,
+  WorkingLate,
+  Programming,
+  ReadingTime,
 };
 
 export type IconType = keyof typeof availabeIcons;

@@ -1,23 +1,20 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet } from "react-native";
+import Home from "./screens/Home";
 
 import Onboarding from "./screens/Onboarding";
+import { RootStackParamList } from "./types/CommonTypes";
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const { height, width } = useWindowDimensions();
   return (
-    <View style={[styles.container]}>
-      <Onboarding />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Onboarding" component={Onboarding} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

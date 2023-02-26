@@ -8,7 +8,7 @@ import Card from "../components/card/Card";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/CommonTypes";
 import { primaryButton } from "../styles/buttons";
-import { primaryText, secondaryText } from "../styles/texts";
+import { primaryTextWhite, secondaryText } from "../styles/texts";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Onboarding">;
 
@@ -85,7 +85,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         >
           <Text
             style={{
-              ...primaryText,
+              ...primaryTextWhite,
               fontSize: fontSize.xxxl,
             }}
           >

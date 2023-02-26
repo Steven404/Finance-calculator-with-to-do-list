@@ -1,4 +1,4 @@
-import { View, StyleSheet, ViewStyle, TouchableHighlight } from "react-native";
+import { StyleSheet, ViewStyle, TouchableHighlight } from "react-native";
 import React, { ReactNode } from "react";
 
 interface CardPropsType {
@@ -13,9 +13,6 @@ const Card = ({ children, onPress, shadow, customStyle }: CardPropsType) => {
     <TouchableHighlight
       activeOpacity={onPress ? 0.75 : 1}
       onPress={onPress}
-      underlayColor={
-        customStyle?.backgroundColor ? customStyle.backgroundColor : "white"
-      }
       style={[
         style.container,
         shadow && style.shadow,

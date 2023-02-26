@@ -4,6 +4,7 @@ export const colors = {
   disabled: "#5A657D",
   error: "#B03E27",
   bgWhite: "#F4F6F6",
+  white: "#FFFFFF",
   darkBlue: "#2751B0",
 };
 

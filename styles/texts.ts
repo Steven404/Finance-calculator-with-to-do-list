@@ -16,7 +16,7 @@ export const secondaryText: TextStyle = {
 
 export const primaryTextWhite: TextStyle = {
   ...primaryText,
-  color: colors.bgWhite,
+  color: colors.white,
 };
 
 export const primaryTextDarkBlue: TextStyle = {

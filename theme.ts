@@ -3,7 +3,7 @@ export const colors = {
   secondary: "#E6A383",
   disabled: "#5A657D",
   error: "#B03E27",
-  bgWhite: "#FFFFFF",
+  bgWhite: "#F4F6F6",
   darkBlue: "#2751B0",
 };
 

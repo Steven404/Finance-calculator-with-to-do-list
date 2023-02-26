@@ -1,6 +1,5 @@
 import { View, StyleSheet, ViewStyle, TouchableHighlight } from "react-native";
 import React, { ReactNode } from "react";
-import { spacing } from "../../theme";
 
 interface CardPropsType {
   children: ReactNode;
@@ -12,26 +11,27 @@ interface CardPropsType {
 const Card = ({ children, onPress, shadow, customStyle }: CardPropsType) => {
   return (
     <TouchableHighlight
-      activeOpacity={0.85}
+      activeOpacity={onPress ? 0.75 : 1}
       onPress={onPress}
-      style={[shadow && style.shadow]}
+      underlayColor={
+        customStyle?.backgroundColor ? customStyle.backgroundColor : "white"
+      }
+      style={[
+        style.container,
+        shadow && style.shadow,
+        customStyle && customStyle,
+      ]}
     >
-      <View style={[style.container, customStyle && customStyle]}>
-        {children}
-      </View>
+      {children}
     </TouchableHighlight>
   );
 };
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    borderWidth: 3,
-    borderRadius: 10,
     overflow: "hidden",
   },
   shadow: {
-    borderRadius: 10,
     backgroundColor: "transparent",
     shadowColor: "#000",
     shadowOffset: {

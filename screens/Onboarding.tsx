@@ -20,6 +20,9 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
 
   const flatListRef = useRef<FlatList>(null);
 
+  const isLastSlide =
+    Math.round(currentSlideOffsetX) === onboardingScreens.length - 1;
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -58,7 +61,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
                   width: 10 + 10 * Math.abs(distanceFrom - 1),
                   height: 3.5 + 1.5 * Math.abs(distanceFrom - 1),
                   backgroundColor: `rgba(39, 81, 176, ${
-                    0.25 + 0.5 * Math.abs(distanceFrom - 1)
+                    0.25 + 0.75 * Math.abs(distanceFrom - 1)
                   })`,
                 },
               ]}
@@ -67,66 +70,38 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         })}
       </View>
       <View style={[styles.footer, { height: height * 0.25 }]}>
-        {Math.round(currentSlideOffsetX) !== onboardingScreens.length - 1 ? (
-          <>
-            <Card
-              shadow
-              customStyle={{
-                borderColor: "lightblue",
-                paddingVertical: spacing.md,
-                paddingHorizontal: spacing.xxl,
-              }}
-              onPress={() => {
-                flatListRef?.current?.scrollToOffset({
+        <Card
+          shadow
+          customStyle={styles.nextButton}
+          onPress={() => {
+            !isLastSlide
+              ? flatListRef?.current?.scrollToOffset({
                   offset: Math.round(currentSlideOffsetX + 1) * width,
-                });
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "400",
-                  fontSize: fontSize.xxxl,
-                }}
-              >
-                Next
-              </Text>
-            </Card>
-            <Text
-              onPress={() => {
-                flatListRef?.current?.scrollToOffset({
-                  offset: (onboardingScreens.length - 1) * width,
-                });
-              }}
-              style={{
-                fontWeight: "400",
-                fontSize: fontSize.xl,
-                color: colors.disabled,
-              }}
-            >
-              Skip
-            </Text>
-          </>
-        ) : (
-          <Card
-            shadow
-            customStyle={{
-              borderColor: "lightblue",
-              paddingVertical: spacing.md,
-              paddingHorizontal: spacing.xxl,
-            }}
-            onPress={() => {
-              navigation.push("Home");
+                })
+              : navigation.push("Home");
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "400",
+              fontSize: fontSize.xxxl,
+              color: "white",
             }}
           >
-            <Text
-              style={{
-                fontWeight: "400",
-                fontSize: fontSize.xxxl,
-              }}
-            >
-              Get started
-            </Text>
-          </Card>
+            {!isLastSlide ? "Next" : "Get Started"}
+          </Text>
+        </Card>
+        {!isLastSlide && (
+          <Text
+            onPress={() => {
+              flatListRef?.current?.scrollToOffset({
+                offset: (onboardingScreens.length - 1) * width,
+              });
+            }}
+            style={styles.skipButton}
+          >
+            Skip
+          </Text>
         )}
       </View>
     </View>
@@ -157,6 +132,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  nextButton: {
+    backgroundColor: colors.darkBlue,
+    borderRadius: 5,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xxl,
+  },
+  skipButton: {
+    fontWeight: "400",
+    fontSize: fontSize.xl,
+    color: colors.disabled,
   },
 });
 

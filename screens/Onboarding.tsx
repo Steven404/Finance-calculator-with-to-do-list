@@ -7,6 +7,8 @@ import { useRef, useState } from "react";
 import Card from "../components/card/Card";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/CommonTypes";
+import { primaryButton } from "../styles/buttons";
+import { primaryText, secondaryText } from "../styles/texts";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Onboarding">;
 
@@ -72,7 +74,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
       <View style={[styles.footer, { height: height * 0.25 }]}>
         <Card
           shadow
-          customStyle={styles.nextButton}
+          customStyle={primaryButton}
           onPress={() => {
             !isLastSlide
               ? flatListRef?.current?.scrollToOffset({
@@ -83,9 +85,8 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         >
           <Text
             style={{
-              fontWeight: "400",
+              ...primaryText,
               fontSize: fontSize.xxxl,
-              color: "white",
             }}
           >
             {!isLastSlide ? "Next" : "Get Started"}
@@ -94,11 +95,12 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         {!isLastSlide && (
           <Text
             onPress={() => {
+              // find the offset of the last slide and scroll to it
               flatListRef?.current?.scrollToOffset({
                 offset: (onboardingScreens.length - 1) * width,
               });
             }}
-            style={styles.skipButton}
+            style={styles.skipText}
           >
             Skip
           </Text>
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
   indicator: {
     height: 3.5,
     width: 10,
-    backgroundColor: "rgba(39, 81, 176,0.25)", //same as dark blue but at rgba and 0.5 opacity
+    backgroundColor: "rgba(39, 81, 176,0.25)", // same as dark blue but at rgba and 0.25 opacity
     borderRadius: 2,
     marginHorizontal: 2,
   },
@@ -133,16 +135,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  nextButton: {
-    backgroundColor: colors.darkBlue,
-    borderRadius: 5,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.xxl,
-  },
-  skipButton: {
-    fontWeight: "400",
+  skipText: {
+    ...secondaryText,
     fontSize: fontSize.xl,
-    color: colors.disabled,
   },
 });
 

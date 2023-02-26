@@ -3,6 +3,7 @@ import { colors, fontSize, spacing } from "../../theme";
 import PersonalCalculator from "../../assets/images/personal_calculator.svg";
 import PiggyBank from "../../assets/images/piggy_bank.svg";
 import Icon, { IconType } from "../image/Icon";
+import { boldTextDarkBlue, secondaryText } from "../../styles/texts";
 
 export interface OnboardingItemType {
   id: number;
@@ -47,15 +48,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: fontSize.xxxl,
-    fontWeight: "800",
-    color: colors.darkBlue,
+    ...boldTextDarkBlue,
   },
   description: {
+    ...secondaryText,
     textAlign: "center",
     fontSize: fontSize.md,
     marginTop: spacing.xxl,
     paddingHorizontal: spacing.xxxxl,
-    color: colors.disabled,
   },
 });
 

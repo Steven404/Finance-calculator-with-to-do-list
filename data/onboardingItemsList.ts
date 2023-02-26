@@ -5,7 +5,7 @@ export const onboardingScreens: Array<OnboardingItemType> = [
     id: 1,
     title: "Manage your work hours",
     description:
-      "Keep track of your daily work schedule with the Work/task organizer",
+      "Keep track of your daily work schedule with the Work/Task organizer",
     icon: "Programming",
   },
   {

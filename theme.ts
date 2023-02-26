@@ -27,3 +27,9 @@ export const fontSize = {
   xxl: 24,
   xxxl: 28,
 };
+
+export const borderRadius = {
+  sm: 5,
+  md: 10,
+  lg: 15,
+};

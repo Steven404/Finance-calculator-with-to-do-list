@@ -1,14 +1,15 @@
-import { FlatList, StyleSheet, View, Text } from "react-native";
-import { colors, fontSize, spacing } from "../theme";
-import { onboardingScreens } from "../data/onboardingItemsList";
-import OnboardingItem from "../components/onboardingItem/OnboardingItem";
-import { useWindowDimensions } from "react-native";
 import { useRef, useState } from "react";
-import Card from "../components/card/Card";
+import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../types/CommonTypes";
+
+import Card from "../components/card/Card";
+import OnboardingItem from "../components/onboardingItem/OnboardingItem";
+import Text from "../components/text/Text";
+import { onboardingScreens } from "../data/onboardingItemsList";
 import { primaryButton } from "../styles/buttons";
-import { primaryTextWhite, secondaryText } from "../styles/texts";
+import { colors, fontSize } from "../theme";
+import { RootStackParamList } from "../types/CommonTypes";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Onboarding">;
 
@@ -83,12 +84,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
               : navigation.push("Home");
           }}
         >
-          <Text
-            style={{
-              ...primaryTextWhite,
-              fontSize: fontSize.xxxl,
-            }}
-          >
+          <Text size="xxxl" color="white">
             {!isLastSlide ? "Next" : "Get Started"}
           </Text>
         </Card>
@@ -100,7 +96,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
                 offset: (onboardingScreens.length - 1) * width,
               });
             }}
-            style={styles.skipText}
+            color="disabled"
           >
             Skip
           </Text>
@@ -134,10 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  skipText: {
-    ...secondaryText,
-    fontSize: fontSize.xl,
   },
 });
 

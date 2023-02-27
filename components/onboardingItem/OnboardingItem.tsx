@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
-import { colors, fontSize, spacing } from "../../theme";
-import PersonalCalculator from "../../assets/images/personal_calculator.svg";
-import PiggyBank from "../../assets/images/piggy_bank.svg";
-import Icon, { IconType } from "../image/Icon";
+import { StyleSheet, View } from "react-native";
+
 import { boldTextDarkBlue, secondaryText } from "../../styles/texts";
+import { fontSize, spacing } from "../../theme";
+import Icon, { IconType } from "../image/Icon";
+import Text from "../text/Text";
 
 export interface OnboardingItemType {
   id: number;
@@ -29,8 +29,19 @@ const OnboardingItem = ({
         <Icon icon={icon} size={width * 0.8} />
       </View>
       <View style={[styles.textWrapper, { flex: 0.2 }]}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text align="center" size="xxl" color="darkBlue" weight="600">
+          {title}
+        </Text>
+        <Text
+          marginVertical={spacing.xl}
+          marginHorizontal={spacing.xxxxl}
+          align="center"
+          size="sm"
+          color="disabled"
+          weight="400"
+        >
+          {description}
+        </Text>
       </View>
     </View>
   );
@@ -45,17 +56,6 @@ const styles = StyleSheet.create({
   textWrapper: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  title: {
-    fontSize: fontSize.xxxl,
-    ...boldTextDarkBlue,
-  },
-  description: {
-    ...secondaryText,
-    textAlign: "center",
-    fontSize: fontSize.md,
-    marginTop: spacing.xxl,
-    paddingHorizontal: spacing.xxxxl,
   },
 });
 

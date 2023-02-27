@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { colors, fontSize, spacing } from "../../theme";
 import { StatusBar } from "expo-status-bar";
-import { primaryTextWhite } from "../../styles/texts";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+
+import Text from "../../components/text/Text";
+import { colors, spacing } from "../../theme";
 
 interface LayoutPropsType {
   actionButtonOnPress?: () => void;
@@ -10,6 +11,7 @@ interface LayoutPropsType {
   headerTitle?: string;
   headerSubtitle?: string;
   width: number;
+  fillBackground?: boolean;
 }
 
 const Layout = ({
@@ -18,18 +20,29 @@ const Layout = ({
   headerTitle,
   headerSubtitle,
   width,
+  fillBackground = false,
 }: LayoutPropsType) => {
   return (
-    <View style={[styles.container, { width }]}>
+    <View
+      style={[
+        styles.container,
+        { width },
+        fillBackground && { backgroundColor: colors.darkBlue },
+      ]}
+    >
       <View style={styles.header}>
         {headerTitle && (
-          <Text style={{ fontSize: fontSize.xxxl, ...primaryTextWhite }}>
+          <Text color="white" size="xxxl">
             {headerTitle}
           </Text>
         )}
-        {headerSubtitle && <Text>{headerSubtitle}</Text>}
+        {headerSubtitle && (
+          <Text size="xs" marginVertical={spacing.md}>
+            {headerSubtitle}
+          </Text>
+        )}
       </View>
-      {children}
+      <View style={styles.pageContent}>{children}</View>
       <StatusBar animated style="light" />
     </View>
   );
@@ -39,11 +52,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  pageContent: {
+    flex: 0.75,
+    padding: spacing.xxxxl,
+  },
   header: {
-    flex: 0.2,
+    flex: 0.25,
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingLeft: spacing.xxxxl,
+    paddingTop: spacing.xl,
+    paddingHorizontal: spacing.xxxl,
     backgroundColor: colors.darkBlue,
   },
 });

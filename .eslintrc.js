@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:typescript-sort-keys/recommended"',
     'airbnb',
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -84,8 +85,8 @@ module.exports = {
       1,
       { caseSensitive: false },
     ],
-    'sort-keys-fix/sort-keys-fix': 'warn',
     'typescript-sort-keys/interface': 'warn',
+    'sort-keys-fix/sort-keys-fix': 'warn',
     'typescript-sort-keys/string-enum': 'warn',
   },
   settings: {

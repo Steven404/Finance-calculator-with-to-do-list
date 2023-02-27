@@ -1,5 +1,5 @@
-import { StyleSheet, ViewStyle, TouchableHighlight } from "react-native";
 import React, { ReactNode } from "react";
+import { StyleSheet, TouchableHighlight, ViewStyle } from "react-native";
 
 interface CardPropsType {
   children: ReactNode;

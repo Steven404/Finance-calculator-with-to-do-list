@@ -1,7 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import { boldTextDarkBlue, secondaryText } from "../../styles/texts";
-import { fontSize, spacing } from "../../theme";
+import { spacing } from "../../theme";
 import Icon, { IconType } from "../image/Icon";
 import Text from "../text/Text";
 

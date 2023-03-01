@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Text as RNText, TextStyle } from "react-native";
 
 import { colors, fontSize } from "../../theme";
 
 interface TextPropsType {
   align?: TextStyle["textAlign"];
-  children: string;
+  children: ReactNode;
   color?: keyof typeof colors;
   marginHorizontal?: TextStyle["marginHorizontal"];
   marginVertical?: TextStyle["marginVertical"];

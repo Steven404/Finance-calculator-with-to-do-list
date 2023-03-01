@@ -1,40 +1,67 @@
-import { useRef, useState } from "react";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useRef, useState } from 'react';
 import {
   FlatList,
   Modal,
   StyleSheet,
   useWindowDimensions,
   View,
-} from "react-native";
-import Toast from "react-native-toast-message";
+} from 'react-native';
+import Toast from 'react-native-toast-message';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import Card from '../components/card/Card';
+import OnboardingItem from '../components/onboardingItem/OnboardingItem';
+import Text from '../components/text/Text';
+import TextInput from '../components/textInput/TextInput';
+import { onboardingScreens } from '../data/onboardingItemsList';
+import { storeData } from '../modules/common';
+import { primaryButton } from '../styles/buttons';
+import { colors, spacing } from '../theme';
+import { RootStackParamList } from '../types/CommonTypes';
 
-import Card from "../components/card/Card";
-import OnboardingItem from "../components/onboardingItem/OnboardingItem";
-import Text from "../components/text/Text";
-import TextInput from "../components/textInput/TextInput";
-import { onboardingScreens } from "../data/onboardingItemsList";
-import { storeData } from "../modules/common";
-import { primaryButton } from "../styles/buttons";
-import { colors, spacing } from "../theme";
-import { RootStackParamList } from "../types/CommonTypes";
+type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>;
 
-type Props = NativeStackScreenProps<RootStackParamList, "Onboarding">;
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: colors.bgWhite,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  footer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+  indicator: {
+    backgroundColor: 'rgba(39, 81, 176,0.25)',
+    // same as dark blue but at rgba and 0.25 opacity
+    borderRadius: 2,
+
+    height: 3.5,
+    marginHorizontal: 2,
+    width: 10,
+  },
+  indicatorsContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+});
 
 const showErrorToast = () =>
   Toast.show({
-    type: "error",
-    text1: "Error",
-    text2: "Please enter a name",
+    text1: 'Error',
+    text2: 'Please enter a name',
+    type: 'error',
   });
 
 const Onboarding = ({ navigation }: Props): JSX.Element => {
   const { width } = useWindowDimensions();
   const { height } = useWindowDimensions();
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>('');
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -48,6 +75,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
     Math.round(currentSlideOffsetX) === onboardingScreens.length - 1;
 
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <View style={styles.container}>
       <Modal
         visible={isModalVisible}
@@ -56,17 +84,17 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
       >
         <View
           style={{
-            paddingHorizontal: spacing.xxxl,
+            alignItems: 'center',
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            paddingHorizontal: spacing.xxxl,
           }}
         >
           <TextInput
             label="Name"
             icon="account"
             placeholder="John"
-            cursorColor={"#000000"}
+            cursorColor="#000000"
             keyboardType="name-phone-pad"
             onChangeText={setName}
           />
@@ -78,8 +106,8 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
                 showErrorToast();
                 return;
               }
-              await storeData("user", name);
-              navigation.push("Home");
+              await storeData('user', name);
+              navigation.push('Home');
             }}
           >
             <Text size="xl" color="white">
@@ -114,19 +142,20 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
           const distanceFrom = Math.abs(index - currentSlideOffsetX);
           return (
             <View
-              key={index}
+              key={_.id}
               style={[
                 styles.indicator,
                 // if Math.abs(index - currentSlideOffset) < 1 that means
                 // the corresponding screen of that indicator is at least partly in view
                 distanceFrom < 1 && {
-                  // if Math.abs(distanceFrom - 1) === 1 that means that the slide is the current viewed slide.
-                  // if it's something like 0.5 then that means that user is scrolling and is between this and another slide so we apply part of the effect
-                  width: 10 + 10 * Math.abs(distanceFrom - 1),
-                  height: 3.5 + 1.5 * Math.abs(distanceFrom - 1),
                   backgroundColor: `rgba(39, 81, 176, ${
                     0.25 + 0.75 * Math.abs(distanceFrom - 1)
                   })`,
+
+                  height: 3.5 + 1.5 * Math.abs(distanceFrom - 1),
+                  // if Math.abs(distanceFrom - 1) === 1 that means that the slide is the current viewed slide.
+                  // if it's something like 0.5 then that means that user is scrolling and is between this and another slide so we apply part of the effect
+                  width: 10 + 10 * Math.abs(distanceFrom - 1),
                 },
               ]}
             />
@@ -138,6 +167,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
           shadow
           customStyle={primaryButton}
           onPress={() => {
+            // eslint-disable-next-line no-unused-expressions
             !isLastSlide
               ? flatListRef?.current?.scrollToOffset({
                   offset: Math.round(currentSlideOffsetX + 1) * width,
@@ -146,7 +176,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
           }}
         >
           <Text size="xxxl" color="white">
-            {!isLastSlide ? "Next" : "Get Started"}
+            {!isLastSlide ? 'Next' : 'Get Started'}
           </Text>
         </Card>
         {!isLastSlide && (
@@ -166,32 +196,5 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.bgWhite,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  indicator: {
-    height: 3.5,
-    width: 10,
-    backgroundColor: "rgba(39, 81, 176,0.25)", // same as dark blue but at rgba and 0.25 opacity
-    borderRadius: 2,
-    marginHorizontal: 2,
-  },
-  footer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  },
-  indicatorsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default Onboarding;

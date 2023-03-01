@@ -1,30 +1,42 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from 'react-native';
 
-import { spacing } from "../../theme";
-import Icon, { IconType } from "../image/Icon";
-import Text from "../text/Text";
+import { spacing } from '../../theme';
+import Icon, { IconType } from '../image/Icon';
+import Text from '../text/Text';
 
 export interface OnboardingItemType {
-  id: number;
-  title: string;
   description: string;
   icon: IconType;
+  id: number;
+  title: string;
 }
 
 interface OnboardingItemPropsType extends OnboardingItemType {
   width: number;
 }
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  textWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const OnboardingItem = ({
-  id,
-  title,
   description,
   icon,
+  id,
+  title,
   width,
 }: OnboardingItemPropsType): JSX.Element => {
   return (
     <View style={[styles.container, { width }]}>
-      <View style={{ flex: 0.8, justifyContent: "center", marginTop: 50 }}>
+      <View style={{ flex: 0.8, justifyContent: 'center', marginTop: 50 }}>
         <Icon icon={icon} size={width * 0.8} />
       </View>
       <View style={[styles.textWrapper, { flex: 0.2 }]}>
@@ -45,17 +57,5 @@ const OnboardingItem = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default OnboardingItem;

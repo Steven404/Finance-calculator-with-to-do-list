@@ -2,6 +2,7 @@ module.exports = {
     env: {
       browser: true,
       es2021: true,
+      "react-native/react-native": true,
     },
     extends: [
       'plugin:react/recommended',
@@ -29,6 +30,7 @@ module.exports = {
       'sort-keys-fix',
       'typescript-sort-keys',
       'sort-destructure-keys',
+      'react-native',
     ],
     root: true,
     rules: {
@@ -60,6 +62,9 @@ module.exports = {
       'no-shadow': 'off',
       'no-underscore-dangle': ['error', { allow: ['_id'] }],
       'prettier/prettier': ['error', { endOfLine: 'auto',singleQuote: true, trailingComma: 'es5' }],
+      'react-native/no-single-element-style-arrays': 2,
+      'react-native/no-unused-styles': 2,
+      'react-native/split-platform-components': 2,
       'react/function-component-definition': [
         'error',
         {

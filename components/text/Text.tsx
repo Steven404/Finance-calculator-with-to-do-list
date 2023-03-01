@@ -1,39 +1,39 @@
-import React, { ReactNode } from "react";
-import { Text as RNText, TextStyle } from "react-native";
+import React, { ReactNode } from 'react';
+import { Text as RNText, TextStyle } from 'react-native';
 
-import { colors, fontSize } from "../../theme";
+import { colors, fontSize } from '../../theme';
 
 interface TextPropsType {
-  align?: TextStyle["textAlign"];
+  align?: TextStyle['textAlign'];
   children: ReactNode;
   color?: keyof typeof colors;
-  marginHorizontal?: TextStyle["marginHorizontal"];
-  marginVertical?: TextStyle["marginVertical"];
-  size?: keyof typeof fontSize;
-  weight?: TextStyle["fontWeight"];
+  marginHorizontal?: TextStyle['marginHorizontal'];
+  marginVertical?: TextStyle['marginVertical'];
   onPress?: () => void;
+  size?: keyof typeof fontSize;
+  weight?: TextStyle['fontWeight'];
 }
 
 const Text = ({
-  align = "left",
+  align = 'left',
   children,
-  color = "textGray",
+  color = 'textGray',
   marginHorizontal,
   marginVertical,
-  size = "md",
-  weight = "400",
   onPress,
+  size = 'md',
+  weight = '400',
 }: TextPropsType) => {
   return (
     <RNText
       onPress={onPress}
       style={{
-        textAlign: align,
         color: colors[color],
-        marginHorizontal: marginHorizontal,
-        marginVertical: marginVertical,
         fontSize: fontSize[size],
         fontWeight: weight,
+        marginHorizontal,
+        marginVertical,
+        textAlign: align,
       }}
     >
       {children}

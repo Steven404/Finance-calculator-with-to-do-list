@@ -1,26 +1,45 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, View } from "react-native";
+/* eslint-disable react/style-prop-object */
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import Text from "../../components/text/Text";
-import { colors, spacing } from "../../theme";
+import { colors, spacing } from '../../theme';
+import Text from '../text/Text';
 
 interface LayoutPropsType {
   actionButtonOnPress?: () => void;
   children?: JSX.Element[] | JSX.Element;
-  headerTitle?: string;
-  headerSubtitle?: string;
-  width: number;
   fillBackground?: boolean;
+  headerSubtitle?: string;
+  headerTitle?: string;
+  width: number;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    alignItems: 'flex-start',
+    backgroundColor: colors.darkBlue,
+    flex: 0.25,
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xxxl,
+    paddingTop: spacing.xl,
+  },
+  pageContent: {
+    flex: 0.75,
+    padding: spacing.xxxxl,
+  },
+});
 
 const Layout = ({
   actionButtonOnPress,
   children,
-  headerTitle,
-  headerSubtitle,
-  width,
   fillBackground = false,
+  headerSubtitle,
+  headerTitle,
+  width,
 }: LayoutPropsType) => {
   return (
     <View
@@ -47,23 +66,5 @@ const Layout = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  pageContent: {
-    flex: 0.75,
-    padding: spacing.xxxxl,
-  },
-  header: {
-    flex: 0.25,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingTop: spacing.xl,
-    paddingHorizontal: spacing.xxxl,
-    backgroundColor: colors.darkBlue,
-  },
-});
 
 export default Layout;

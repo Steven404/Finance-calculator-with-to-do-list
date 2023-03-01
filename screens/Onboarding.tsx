@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  modaView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xxxl,
+  },
 });
 
 const showErrorToast = () =>
@@ -82,14 +88,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         animationType="fade"
         onRequestClose={() => setIsModalVisible(false)}
       >
-        <View
-          style={{
-            alignItems: 'center',
-            flex: 1,
-            justifyContent: 'center',
-            paddingHorizontal: spacing.xxxl,
-          }}
-        >
+        <View style={styles.modaView}>
           <TextInput
             label="Name"
             icon="account"

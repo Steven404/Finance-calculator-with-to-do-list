@@ -1,14 +1,31 @@
-import React, { ReactNode } from "react";
-import { StyleSheet, TouchableHighlight, ViewStyle } from "react-native";
+import React, { ReactNode } from 'react';
+import { StyleSheet, TouchableHighlight, ViewStyle } from 'react-native';
 
 interface CardPropsType {
   children: ReactNode;
+  customStyle?: ViewStyle;
   onPress?: () => void;
   shadow?: boolean;
-  customStyle?: ViewStyle;
 }
 
-const Card = ({ children, onPress, shadow, customStyle }: CardPropsType) => {
+const style = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+  shadow: {
+    backgroundColor: 'transparent',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+  },
+});
+
+const Card = ({ children, customStyle, onPress, shadow }: CardPropsType) => {
   return (
     <TouchableHighlight
       activeOpacity={onPress ? 0.75 : 1}
@@ -23,22 +40,5 @@ const Card = ({ children, onPress, shadow, customStyle }: CardPropsType) => {
     </TouchableHighlight>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    overflow: "hidden",
-  },
-  shadow: {
-    backgroundColor: "transparent",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 2,
-  },
-});
 
 export default Card;

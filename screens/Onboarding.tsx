@@ -1,21 +1,42 @@
 import { useRef, useState } from "react";
-import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
+import {
+  FlatList,
+  Modal,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import Toast from "react-native-toast-message";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import Card from "../components/card/Card";
 import OnboardingItem from "../components/onboardingItem/OnboardingItem";
 import Text from "../components/text/Text";
+import TextInput from "../components/textInput/TextInput";
 import { onboardingScreens } from "../data/onboardingItemsList";
+import { storeData } from "../modules/common";
 import { primaryButton } from "../styles/buttons";
-import { colors, fontSize } from "../theme";
+import { colors, spacing } from "../theme";
 import { RootStackParamList } from "../types/CommonTypes";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Onboarding">;
 
+const showErrorToast = () =>
+  Toast.show({
+    type: "error",
+    text1: "Error",
+    text2: "Please enter a name",
+  });
+
 const Onboarding = ({ navigation }: Props): JSX.Element => {
   const { width } = useWindowDimensions();
   const { height } = useWindowDimensions();
+
+  const [name, setName] = useState<string>("");
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // example: first slide has 0 x offset from the screen
   // if the current slide is the second one, then the currentSlideOffset is 1
@@ -28,6 +49,46 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
 
   return (
     <View style={styles.container}>
+      <Modal
+        visible={isModalVisible}
+        animationType="fade"
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View
+          style={{
+            paddingHorizontal: spacing.xxxl,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TextInput
+            label="Name"
+            icon="account"
+            placeholder="John"
+            cursorColor={"#000000"}
+            keyboardType="name-phone-pad"
+            onChangeText={setName}
+          />
+          <Card
+            shadow
+            customStyle={{ ...primaryButton, marginTop: spacing.xxxxl }}
+            onPress={async () => {
+              if (!name.length) {
+                showErrorToast();
+                return;
+              }
+              await storeData("user", name);
+              navigation.push("Home");
+            }}
+          >
+            <Text size="xl" color="white">
+              Save
+            </Text>
+          </Card>
+        </View>
+        <Toast />
+      </Modal>
       <FlatList
         ref={flatListRef}
         onScroll={(e) =>
@@ -81,7 +142,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
               ? flatListRef?.current?.scrollToOffset({
                   offset: Math.round(currentSlideOffsetX + 1) * width,
                 })
-              : navigation.push("Home");
+              : setIsModalVisible(true);
           }}
         >
           <Text size="xxxl" color="white">
@@ -90,12 +151,12 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         </Card>
         {!isLastSlide && (
           <Text
-            onPress={() => {
+            onPress={() =>
               // find the offset of the last slide and scroll to it
               flatListRef?.current?.scrollToOffset({
                 offset: (onboardingScreens.length - 1) * width,
-              });
-            }}
+              })
+            }
             color="disabled"
           >
             Skip

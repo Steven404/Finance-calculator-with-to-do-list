@@ -140,6 +140,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         keyExtractor={(item) => item.title}
         pagingEnabled
         horizontal
+        showsHorizontalScrollIndicator={false}
       />
       <View style={[styles.indicatorsContainer, { height: height * 0.05 }]}>
         {onboardingScreens.map((_, index) => {

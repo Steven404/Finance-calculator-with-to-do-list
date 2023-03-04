@@ -1,7 +1,7 @@
 import { TaskType } from './TaskTypes';
 
 export interface UserType {
-  id: string;
+  id?: string;
   name: string;
   tasks: TaskType[];
 }

@@ -8,13 +8,14 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
+import uuid from 'react-native-uuid';
 
 import Card from '../components/card/Card';
 import OnboardingItem from '../components/onboardingItem/OnboardingItem';
 import Text from '../components/text/Text';
 import TextInput from '../components/textInput/TextInput';
 import { onboardingScreens } from '../data/onboardingItemsList';
-import { storeData } from '../modules/common';
+import { storeObject } from '../modules/common';
 import { primaryButton } from '../styles/buttons';
 import { colors, spacing } from '../theme';
 import { RootStackParamList } from '../types/CommonTypes';
@@ -105,7 +106,11 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
                 showErrorToast();
                 return;
               }
-              await storeData('user', name);
+              await storeObject('user', {
+                id: uuid.v4() as string,
+                name: '',
+                tasks: [],
+              });
               navigation.push('Home');
             }}
           >

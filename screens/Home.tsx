@@ -1,16 +1,26 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useWindowDimensions, View } from 'react-native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 import Layout from '../components/layout/Layout';
-import { getString } from '../modules/common';
+import { getData } from '../modules/common';
+import { RootStackParamList } from '../types/CommonTypes';
 
-const Home = (): JSX.Element => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const Home = ({ navigation }: Props): JSX.Element => {
   const { width } = useWindowDimensions();
   const [user, setUser] = useState('');
 
   useEffect(() => {
     const getUser = async () => {
-      setUser(await getString('user'));
+      const fetchedUser = await getData('user');
+      if (!fetchedUser) {
+        Toast.show({ text1: 'Error', text2: 'No user found', type: 'error' });
+        navigation.push('Onboarding');
+      }
+      setUser(fetchedUser);
     };
     getUser();
   }, []);

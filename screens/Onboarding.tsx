@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: spacing.xxxl,
+    paddingHorizontal: spacing.xxl,
   },
 });
 
@@ -100,7 +100,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
           />
           <Card
             shadow
-            customStyle={{ ...primaryButton, marginTop: spacing.xxxxl }}
+            customStyle={{ ...primaryButton, marginTop: spacing.xxxl }}
             onPress={async () => {
               if (!name.length) {
                 showErrorToast();

@@ -14,15 +14,15 @@ const styles = StyleSheet.create({
   borderRightOfImage: {
     backgroundColor: colors.darkBlue,
     borderRadius: borderRadius.sm,
-    height: spacing.xxxl,
-    marginLeft: spacing.lg,
+    height: spacing.xxl,
+    marginLeft: spacing.md,
     width: 3,
     zIndex: 1,
   },
   leftIcon: {
     alignItems: 'center',
     flexDirection: 'row',
-    left: spacing.lg,
+    left: spacing.md,
     position: 'absolute',
     top: 50,
     zIndex: 1,
@@ -49,7 +49,7 @@ const TextInput = ({ icon, label, ...props }: ExtraInputProps) => {
         <MaterialCommunityIcons name={icon} size={30} color={colors.darkBlue} />
         <View style={styles.borderRightOfImage} />
       </View>
-      <Text weight="600" color="darkBlue" marginVertical={spacing.md}>
+      <Text weight="600" color="darkBlue" marginVertical={spacing.sm}>
         {label}
       </Text>
       <RNTextInput

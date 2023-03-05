@@ -21,23 +21,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     bottom: 0,
     flex: 0.15,
-    position: 'relative',
+    height: '100%',
+    justifyContent: 'flex-start',
   },
   actionBarContent: { height: '100%', justifyContent: 'center' },
   actionButtonLine: {
     backgroundColor: colors.textGray,
     border: 5,
     borderRadius: borderRadius.lg,
-    height: 5,
-    width: '95%',
+    height: 2.5,
+    width: '90%',
   },
   container: {
     flex: 1,
+    height: '100%',
   },
   header: {
     alignItems: 'flex-start',
     backgroundColor: colors.darkBlue,
-    flex: 0.25,
+    flex: 0.2,
     justifyContent: 'flex-start',
     paddingHorizontal: spacing.xxxl,
     paddingTop: spacing.xxxxl,
@@ -45,7 +47,8 @@ const styles = StyleSheet.create({
     top: 0,
   },
   pageContent: {
-    padding: spacing.xxxxl,
+    paddingHorizontal: spacing.xxxl,
+    paddingVertical: spacing.xl,
   },
 });
 
@@ -80,7 +83,7 @@ const Layout = ({
       <View
         style={{
           ...styles.pageContent,
-          flex: actionButtonOnPress ? 0.6 : 0.75,
+          flex: actionButtonOnPress ? 0.65 : 0.75,
         }}
       >
         {children}

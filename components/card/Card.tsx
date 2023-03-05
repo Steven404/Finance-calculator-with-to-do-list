@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, TouchableHighlight, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 
 interface CardPropsType {
   children: ReactNode;
@@ -27,7 +27,7 @@ const style = StyleSheet.create({
 
 const Card = ({ children, customStyle, onPress, shadow }: CardPropsType) => {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       activeOpacity={onPress ? 0.75 : 1}
       onPress={onPress}
       style={[
@@ -37,7 +37,7 @@ const Card = ({ children, customStyle, onPress, shadow }: CardPropsType) => {
       ]}
     >
       {children}
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

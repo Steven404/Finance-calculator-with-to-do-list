@@ -1,9 +1,10 @@
 /* eslint-disable react/style-prop-object */
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { colors, spacing } from '../../theme';
+import { borderRadius, colors, spacing } from '../../theme';
 import Text from '../text/Text';
 
 interface LayoutPropsType {
@@ -16,6 +17,20 @@ interface LayoutPropsType {
 }
 
 const styles = StyleSheet.create({
+  actionBar: {
+    alignItems: 'center',
+    bottom: 0,
+    flex: 0.15,
+    position: 'relative',
+  },
+  actionBarContent: { height: '100%', justifyContent: 'center' },
+  actionButtonLine: {
+    backgroundColor: colors.textGray,
+    border: 5,
+    borderRadius: borderRadius.lg,
+    height: 5,
+    width: '95%',
+  },
   container: {
     flex: 1,
   },
@@ -23,12 +38,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: colors.darkBlue,
     flex: 0.25,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: spacing.xxxl,
-    paddingTop: spacing.xl,
+    paddingTop: spacing.xxxxl,
+    position: 'relative',
+    top: 0,
   },
   pageContent: {
-    flex: 0.75,
     padding: spacing.xxxxl,
   },
 });
@@ -61,7 +77,28 @@ const Layout = ({
           </Text>
         )}
       </View>
-      <View style={styles.pageContent}>{children}</View>
+      <View
+        style={{
+          ...styles.pageContent,
+          flex: actionButtonOnPress ? 0.6 : 0.75,
+        }}
+      >
+        {children}
+      </View>
+      {actionButtonOnPress && (
+        <View style={styles.actionBar}>
+          <View style={styles.actionButtonLine} />
+          <View style={styles.actionBarContent}>
+            <TouchableOpacity activeOpacity={0.6} onPress={actionButtonOnPress}>
+              <MaterialCommunityIcons
+                name="plus-circle-outline"
+                size={spacing.xxxxl}
+                color={colors.textGray}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
       <StatusBar animated style="light" />
     </View>
   );

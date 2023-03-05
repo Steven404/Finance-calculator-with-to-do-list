@@ -46,7 +46,11 @@ const TextInput = ({ icon, label, ...props }: ExtraInputProps) => {
   return (
     <View style={{ width: '100%' }}>
       <View style={styles.leftIcon}>
-        <MaterialCommunityIcons name={icon} size={30} color={colors.darkBlue} />
+        <MaterialCommunityIcons
+          name={icon}
+          size={spacing.xxxl}
+          color={colors.darkBlue}
+        />
         <View style={styles.borderRightOfImage} />
       </View>
       <Text weight="600" color="darkBlue" marginVertical={spacing.sm}>

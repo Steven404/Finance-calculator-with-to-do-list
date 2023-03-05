@@ -1,62 +1,61 @@
-import { StyleSheet, Text, View } from "react-native";
-import { colors, fontSize, spacing } from "../../theme";
-import PersonalCalculator from "../../assets/images/personal_calculator.svg";
-import PiggyBank from "../../assets/images/piggy_bank.svg";
-import Icon, { IconType } from "../image/Icon";
+import { StyleSheet, View } from 'react-native';
+
+import { spacing } from '../../theme';
+import Icon, { IconType } from '../image/Icon';
+import Text from '../text/Text';
 
 export interface OnboardingItemType {
-  id: number;
-  title: string;
   description: string;
   icon: IconType;
+  id: number;
+  title: string;
 }
 
 interface OnboardingItemPropsType extends OnboardingItemType {
   width: number;
 }
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  textWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const OnboardingItem = ({
-  id,
-  title,
   description,
   icon,
+  id,
+  title,
   width,
 }: OnboardingItemPropsType): JSX.Element => {
   return (
     <View style={[styles.container, { width }]}>
-      <View style={{ flex: 0.8, justifyContent: "center", marginTop: 50 }}>
+      <View style={{ flex: 0.8, justifyContent: 'center', marginTop: 50 }}>
         <Icon icon={icon} size={width * 0.8} />
       </View>
       <View style={[styles.textWrapper, { flex: 0.2 }]}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text align="center" size="xxl" color="darkBlue" weight="600">
+          {title}
+        </Text>
+        <Text
+          marginVertical={spacing.lg}
+          marginHorizontal={spacing.xxxl}
+          align="center"
+          size="sm"
+          color="disabled"
+          weight="400"
+        >
+          {description}
+        </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: fontSize.xxxl,
-    fontWeight: "800",
-    color: colors.darkBlue,
-  },
-  description: {
-    textAlign: "center",
-    fontSize: fontSize.md,
-    marginTop: spacing.xxl,
-    paddingHorizontal: spacing.xxxxl,
-    color: colors.disabled,
-  },
-});
 
 export default OnboardingItem;

@@ -1,14 +1,13 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
-import Home from "./screens/Home";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Onboarding from "./screens/Onboarding";
-import { RootStackParamList } from "./types/CommonTypes";
+import Home from './screens/Home';
+import Onboarding from './screens/Onboarding';
+import { RootStackParamList } from './types/CommonTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -17,4 +16,6 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;

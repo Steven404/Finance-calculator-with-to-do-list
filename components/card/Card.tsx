@@ -1,47 +1,44 @@
-import { View, StyleSheet, ViewStyle, TouchableHighlight } from "react-native";
-import React, { ReactNode } from "react";
-import { spacing } from "../../theme";
+import React, { ReactNode } from 'react';
+import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 
 interface CardPropsType {
   children: ReactNode;
+  customStyle?: ViewStyle;
   onPress?: () => void;
   shadow?: boolean;
-  customStyle?: ViewStyle;
 }
-
-const Card = ({ children, onPress, shadow, customStyle }: CardPropsType) => {
-  return (
-    <TouchableHighlight
-      activeOpacity={0.85}
-      onPress={onPress}
-      style={[shadow && style.shadow]}
-    >
-      <View style={[style.container, customStyle && customStyle]}>
-        {children}
-      </View>
-    </TouchableHighlight>
-  );
-};
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    borderWidth: 3,
-    borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   shadow: {
-    borderRadius: 10,
-    backgroundColor: "transparent",
-    shadowColor: "#000",
+    backgroundColor: 'transparent',
+    elevation: 2,
+    shadowColor: '#000',
     shadowOffset: {
-      width: 0,
       height: 1,
+      width: 0,
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 2,
   },
 });
+
+const Card = ({ children, customStyle, onPress, shadow }: CardPropsType) => {
+  return (
+    <TouchableOpacity
+      activeOpacity={onPress ? 0.75 : 1}
+      onPress={onPress}
+      style={[
+        style.container,
+        shadow && style.shadow,
+        customStyle && customStyle,
+      ]}
+    >
+      {children}
+    </TouchableOpacity>
+  );
+};
 
 export default Card;

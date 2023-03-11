@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  modaView: {
+  modalView: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: spacing.xxl,
   },
 });
 
@@ -76,6 +75,8 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
   // if the current slide is the second one, then the currentSlideOffset is 1
   const [currentSlideOffsetX, setCurrentSlideOffsetX] = useState<number>(0);
 
+  const [hasNameInputError, setHasNameInputError] = useState<boolean>(false);
+
   const flatListRef = useRef<FlatList>(null);
 
   const isLastSlide =
@@ -89,18 +90,22 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
         animationType="fade"
         onRequestClose={() => setIsModalVisible(false)}
       >
-        <View style={styles.modaView}>
+        <View style={styles.modalView}>
           <TextInput
             label="Name"
             icon="account"
             placeholder="John"
             cursorColor="#000000"
             keyboardType="name-phone-pad"
-            onChangeText={setName}
+            onChangeText={(text) => {
+              setName(text);
+              setHasNameInputError(!text.trim().length);
+            }}
+            error={hasNameInputError ? 'Please enter a name' : ''}
           />
           <Card
             shadow
-            customStyle={{ ...primaryButton, marginTop: spacing.xxxl }}
+            customStyle={{ ...primaryButton }}
             onPress={async () => {
               if (!name.length) {
                 showErrorToast();
@@ -192,7 +197,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
                 offset: (onboardingScreens.length - 1) * width,
               })
             }
-            color="disabled"
+            color="textGray"
           >
             Skip
           </Text>

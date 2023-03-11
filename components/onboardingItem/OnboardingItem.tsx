@@ -48,7 +48,7 @@ const OnboardingItem = ({
           marginHorizontal={spacing.xxxl}
           align="center"
           size="sm"
-          color="disabled"
+          color="textGray"
           weight="400"
         >
           {description}

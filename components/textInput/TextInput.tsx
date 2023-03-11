@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { ComponentProps, ReactNode } from 'react';
+import React, { ComponentProps, ReactNode, useState } from 'react';
 import {
   StyleSheet,
   TextInput as RNTextInput,
@@ -19,48 +19,67 @@ const styles = StyleSheet.create({
     width: 3,
     zIndex: 1,
   },
-  leftIcon: {
+  textInputBorderError: { borderColor: colors.error, borderWidth: 2 },
+  textInputBorderFocused: { borderColor: colors.darkBlue, borderWidth: 2 },
+  textInputWrapper: {
     alignItems: 'center',
-    flexDirection: 'row',
-    left: spacing.md,
-    position: 'absolute',
-    top: 50,
-    zIndex: 1,
-  },
-  textInput: {
-    backgroundColor: colors.white,
-    borderColor: colors.darkBlue,
+    backgroundColor: colors.ofWhite,
     borderRadius: borderRadius.lg,
-    borderWidth: 2,
-    height: 55,
-    paddingLeft: 65,
+    display: 'flex',
+    flexDirection: 'row',
+    padding: spacing.sm,
+  },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingHorizontal: spacing.xxl,
+    paddingVertical: spacing.lg,
   },
 });
 
 interface ExtraInputProps extends TextInputProps {
+  error?: string;
   icon?: ComponentProps<typeof MaterialCommunityIcons>['name'];
   label: ReactNode;
 }
 
-const TextInput = ({ icon, label, ...props }: ExtraInputProps) => {
+const TextInput = ({ error, icon, label, ...props }: ExtraInputProps) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   return (
-    <View style={{ width: '100%' }}>
-      <View style={styles.leftIcon}>
+    <View style={{ ...styles.wrapper, width: '100%' }}>
+      <Text weight="600" color="darkBlue" marginVertical={spacing.sm}>
+        {label}
+      </Text>
+      <View
+        style={{
+          ...styles.textInputWrapper,
+          ...(isFocused && !error && styles.textInputBorderFocused),
+          ...(error && styles.textInputBorderError),
+        }}
+      >
         <MaterialCommunityIcons
           name={icon}
           size={spacing.xxxl}
           color={colors.darkBlue}
         />
-        <View style={styles.borderRightOfImage} />
+        <View
+          style={{
+            ...styles.borderRightOfImage,
+            ...(error && { backgroundColor: colors.error }),
+          }}
+        />
+        <RNTextInput
+          onFocus={() => setIsFocused(true)}
+          style={{ marginLeft: spacing.md, width: '100%' }}
+          {...props}
+        />
       </View>
-      <Text weight="600" color="darkBlue" marginVertical={spacing.sm}>
-        {label}
-      </Text>
-      <RNTextInput
-        placeholderTextColor={colors.textGray}
-        {...props}
-        style={styles.textInput}
-      />
+      {error && (
+        <Text size="sm" color="error">
+          {error}
+        </Text>
+      )}
     </View>
   );
 };

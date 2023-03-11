@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   actionBarContent: { height: '100%', justifyContent: 'center' },
   actionButtonLine: {
-    backgroundColor: colors.textGray,
+    backgroundColor: colors.textGrayLight,
     border: 5,
     borderRadius: borderRadius.lg,
     height: 2.5,
@@ -70,12 +70,12 @@ const Layout = ({
     >
       <View style={styles.header}>
         {headerTitle && (
-          <Text color="white" size="xxxl">
+          <Text color="ofWhite" size="xxxl">
             {headerTitle}
           </Text>
         )}
         {headerSubtitle && (
-          <Text size="xs" marginVertical={spacing.md}>
+          <Text color="textGrayLight" size="xs" marginVertical={spacing.md}>
             {headerSubtitle}
           </Text>
         )}
@@ -96,7 +96,7 @@ const Layout = ({
               <MaterialCommunityIcons
                 name="plus-circle-outline"
                 size={spacing.xxxxl}
-                color={colors.textGray}
+                color={colors.textGrayLight}
               />
             </TouchableOpacity>
           </View>

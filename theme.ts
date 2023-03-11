@@ -3,11 +3,12 @@
 export const colors = {
   bgWhite: '#F4F6F6',
   darkBlue: '#2751B0',
-  disabled: '#5A657D',
-  error: '#B03E27',
+  error: '#C61B01',
+  ofWhite: '#E6E6E6',
   primary: '#48CAE4',
   secondary: '#E6A383',
-  textGray: '#E4E3E4',
+  textGray: '#5A657D',
+  textGrayLight: '#BFBFBF',
   white: '#FFFFFF',
 };
 

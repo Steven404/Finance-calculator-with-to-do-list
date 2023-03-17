@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    paddingHorizontal: spacing.xxl,
     paddingVertical: spacing.lg,
   },
 });

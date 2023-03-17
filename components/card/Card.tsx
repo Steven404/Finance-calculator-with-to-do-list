@@ -1,10 +1,14 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ViewStyle,
+} from 'react-native';
 
-interface CardPropsType {
+interface CardPropsType extends TouchableOpacityProps {
   children: ReactNode;
   customStyle?: ViewStyle;
-  onPress?: () => void;
   shadow?: boolean;
 }
 
@@ -25,20 +29,23 @@ const style = StyleSheet.create({
   },
 });
 
-const Card = ({ children, customStyle, onPress, shadow }: CardPropsType) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={onPress ? 0.75 : 1}
-      onPress={onPress}
-      style={[
-        style.container,
-        shadow && style.shadow,
-        customStyle && customStyle,
-      ]}
-    >
-      {children}
-    </TouchableOpacity>
-  );
-};
+const Card = ({
+  children,
+  customStyle,
+  shadow,
+  ...restProps
+}: CardPropsType) => (
+  <TouchableOpacity
+    activeOpacity={restProps.onPress ? 0.75 : 1}
+    style={[
+      style.container,
+      shadow && style.shadow,
+      customStyle && customStyle,
+    ]}
+    {...restProps}
+  >
+    {children}
+  </TouchableOpacity>
+);
 
 export default Card;

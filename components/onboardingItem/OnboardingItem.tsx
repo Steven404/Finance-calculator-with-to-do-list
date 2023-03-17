@@ -44,8 +44,8 @@ const OnboardingItem = ({
           {title}
         </Text>
         <Text
-          marginVertical={spacing.lg}
-          marginHorizontal={spacing.xxxl}
+          marginVertical="lg"
+          marginHorizontal="xxxl"
           align="center"
           size="sm"
           color="textGray"

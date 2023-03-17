@@ -1,40 +1,42 @@
-import React, { ReactNode } from 'react';
-import { Text as RNText, TextStyle } from 'react-native';
+import React from 'react';
+import { Text as RNText, TextProps, TextStyle } from 'react-native';
 
-import { colors, fontSize } from '../../theme';
+import { colors, fontSize, spacing } from '../../theme';
 
-interface TextPropsType {
+interface TextPropsType extends TextProps {
   align?: TextStyle['textAlign'];
-  children: ReactNode;
   color?: keyof typeof colors;
-  marginHorizontal?: TextStyle['marginHorizontal'];
-  marginVertical?: TextStyle['marginVertical'];
-  onPress?: () => void;
+  marginHorizontal?: keyof typeof spacing;
+  marginVertical?: keyof typeof spacing;
   size?: keyof typeof fontSize;
   weight?: TextStyle['fontWeight'];
 }
 
 const Text = ({
   align = 'left',
-  children,
+  children = 'Hello world',
   color = 'textGray',
   marginHorizontal,
   marginVertical,
-  onPress,
   size = 'md',
   weight = '400',
+  ...restProps
 }: TextPropsType) => {
   return (
     <RNText
-      onPress={onPress}
       style={{
         color: colors[color],
         fontSize: fontSize[size],
         fontWeight: weight,
-        marginHorizontal,
-        marginVertical,
+        ...(marginHorizontal && {
+          marginHorizontal: spacing[marginHorizontal],
+        }),
+        ...(marginVertical && {
+          marginVertical: spacing[marginVertical],
+        }),
         textAlign: align,
       }}
+      {...restProps}
     >
       {children}
     </RNText>

@@ -75,7 +75,7 @@ const Layout = ({
           </Text>
         )}
         {headerSubtitle && (
-          <Text color="textGrayLight" size="xs" marginVertical={spacing.md}>
+          <Text color="textGrayLight" size="xs" marginVertical="md">
             {headerSubtitle}
           </Text>
         )}

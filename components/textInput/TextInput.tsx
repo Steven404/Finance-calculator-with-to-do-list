@@ -47,7 +47,7 @@ const TextInput = ({ error, icon, label, ...props }: ExtraInputProps) => {
 
   return (
     <View style={{ ...styles.wrapper, width: '100%' }}>
-      <Text weight="600" color="darkBlue" marginVertical={spacing.sm}>
+      <Text weight="600" color="darkBlue" marginVertical="sm">
         {label}
       </Text>
       <View

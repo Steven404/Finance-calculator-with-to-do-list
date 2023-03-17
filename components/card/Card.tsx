@@ -6,7 +6,10 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { colors } from '../../theme';
+
 interface CardPropsType extends TouchableOpacityProps {
+  backgroundColor?: keyof typeof colors;
   children: ReactNode;
   customStyle?: ViewStyle;
   shadow?: boolean;
@@ -30,6 +33,7 @@ const style = StyleSheet.create({
 });
 
 const Card = ({
+  backgroundColor,
   children,
   customStyle,
   shadow,
@@ -38,6 +42,7 @@ const Card = ({
   <TouchableOpacity
     activeOpacity={restProps.onPress ? 0.75 : 1}
     style={[
+      backgroundColor && { backgroundColor: colors[backgroundColor] },
       style.container,
       shadow && style.shadow,
       customStyle && customStyle,

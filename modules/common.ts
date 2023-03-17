@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
 
 import { AllTypes } from '../types/CommonTypes';
 import { TaskType } from '../types/TaskTypes';
@@ -28,3 +29,10 @@ export const getData = async (key: string) => {
 export const clearAll = async () => {
   await AsyncStorage.clear();
 };
+
+export const showErrorToast = (message: string, header = 'Error') =>
+  Toast.show({
+    text1: header,
+    text2: message,
+    type: 'error',
+  });

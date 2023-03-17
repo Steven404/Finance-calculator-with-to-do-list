@@ -10,12 +10,13 @@ import {
 import Toast from 'react-native-toast-message';
 import uuid from 'react-native-uuid';
 
+import { getExampleTasks } from '../commonData/exampleTasks';
+import { onboardingScreens } from '../commonData/onboardingItemsList';
 import Card from '../components/card/Card';
 import OnboardingItem from '../components/onboardingItem/OnboardingItem';
 import Text from '../components/text/Text';
 import TextInput from '../components/textInput/TextInput';
-import { onboardingScreens } from '../data/onboardingItemsList';
-import { storeObject } from '../modules/common';
+import { showErrorToast, storeObject } from '../modules/common';
 import { primaryButton } from '../styles/buttons';
 import { colors, spacing } from '../theme';
 import { RootStackParamList } from '../types/CommonTypes';
@@ -53,15 +54,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+    paddingHorizontal: spacing.xxl,
   },
 });
-
-const showErrorToast = () =>
-  Toast.show({
-    text1: 'Error',
-    text2: 'Please enter a name',
-    type: 'error',
-  });
 
 const Onboarding = ({ navigation }: Props): JSX.Element => {
   const { width } = useWindowDimensions();
@@ -82,8 +77,22 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
   const isLastSlide =
     Math.round(currentSlideOffsetX) === onboardingScreens.length - 1;
 
+  const createUser = async (): Promise<void> => {
+    if (!name.length) {
+      setHasNameInputError(true);
+      showErrorToast('Please enter a name');
+      return;
+    }
+    const newUserId = uuid.v4() as string;
+    await storeObject('user', {
+      id: newUserId,
+      name,
+      tasks: getExampleTasks(newUserId),
+    });
+    navigation.push('Home');
+  };
+
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <View style={styles.container}>
       <Modal
         visible={isModalVisible}
@@ -103,22 +112,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
             }}
             error={hasNameInputError ? 'Please enter a name' : ''}
           />
-          <Card
-            shadow
-            customStyle={{ ...primaryButton }}
-            onPress={async () => {
-              if (!name.length) {
-                showErrorToast();
-                return;
-              }
-              await storeObject('user', {
-                id: uuid.v4() as string,
-                name,
-                tasks: [],
-              });
-              navigation.push('Home');
-            }}
-          >
+          <Card shadow customStyle={{ ...primaryButton }} onPress={createUser}>
             <Text size="xl" color="white">
               Save
             </Text>

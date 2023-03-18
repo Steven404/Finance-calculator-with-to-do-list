@@ -1,9 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 
-import { AllTypes } from '../types/CommonTypes';
-import { TaskType } from '../types/TaskTypes';
-import { UserType } from '../types/UserTypes';
+import { AllTypes, AllTypesType } from '../types/CommonTypes';
 
 export const storeString = async (key: string, value: string) => {
   await AsyncStorage.setItem(key, value);
@@ -11,7 +9,7 @@ export const storeString = async (key: string, value: string) => {
 
 export const storeObject = async (
   key: keyof typeof AllTypes,
-  value: UserType | TaskType
+  value: AllTypesType[keyof typeof AllTypes]
 ) => {
   const jsonValue = JSON.stringify(value);
   await AsyncStorage.setItem(key, jsonValue);

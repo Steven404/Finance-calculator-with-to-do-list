@@ -87,7 +87,7 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
     await storeObject('user', {
       id: newUserId,
       name,
-      tasks: getExampleTasks(newUserId),
+      tasks: getExampleTasks(newUserId, 3),
     });
     navigation.push('Home');
   };

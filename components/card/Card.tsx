@@ -20,7 +20,6 @@ const style = StyleSheet.create({
     overflow: 'hidden',
   },
   shadow: {
-    backgroundColor: 'transparent',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {

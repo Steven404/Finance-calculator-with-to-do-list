@@ -1,5 +1,5 @@
 export interface TaskType {
-  completedAt?: string;
+  completedAt?: number;
   id: string;
   remindAt: number;
   summary: string;

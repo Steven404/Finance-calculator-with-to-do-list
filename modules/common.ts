@@ -42,14 +42,28 @@ export const getExampleTasks = (
   number: number
 ): Array<TaskType> => {
   const result: TaskType[] = [];
+  const today = new Date();
+  const oneHourLater = new Date(today);
+  oneHourLater.setHours(oneHourLater.getHours() + 1);
   for (let i = 0; i < number; i += 1) {
     result.push({
       id: uuid.v1() as string,
-      remindAt: new Date().getTime(),
+      remindAt: oneHourLater.getTime(),
       summary: `This is an example task (${i + 1})`,
       title: `Example task ${i + 1}`,
       userId,
     });
   }
   return result;
+};
+
+export const formatDate = (date: number, withTime = false): string => {
+  const dateTime = new Date(date);
+  let dateFormated = `${dateTime.getDate()} - ${
+    dateTime.getMonth() + 1
+  } - ${dateTime.getFullYear()}`;
+  if (withTime) {
+    dateFormated += ` at ${dateTime.getHours()}:${dateTime.getMinutes()}`;
+  }
+  return dateFormated;
 };

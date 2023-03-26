@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   pageContent: {
     paddingHorizontal: spacing.xxxl,
-    paddingVertical: spacing.xl,
+    paddingVertical: spacing.md,
   },
 });
 

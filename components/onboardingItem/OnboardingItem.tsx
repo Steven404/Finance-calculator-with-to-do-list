@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
 
-import { spacing } from '../../theme';
 import Icon, { IconType } from '../image/Icon';
 import Text from '../text/Text';
 

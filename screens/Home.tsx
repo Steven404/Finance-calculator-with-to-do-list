@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
+import Card from '../components/card/Card';
 import Layout from '../components/layout/Layout';
 import Text from '../components/text/Text';
 import TextInput from '../components/textInput/TextInput';
@@ -22,18 +23,22 @@ const styles = StyleSheet.create({
     padding: spacing.xxl,
     top: '20%',
   },
+  taskCard: {
+    padding: spacing.md,
+  },
+  tasksWrapper: { flex: 1 },
 });
 
-const getUserTasksForToday = (tasks: TaskType[]) =>
+const getUserTasksForToday = (tasks: Array<TaskType>) =>
   tasks.filter(
     (task) =>
       new Date(task.remindAt).toDateString() === new Date().toDateString()
   );
 
-const Home = ({ navigation }: Props): JSX.Element => {
+const Home = ({ navigation }: Props) => {
   const { width } = useWindowDimensions();
   const [user, setUser] = useState<UserType>();
-  const [tasksForToday, setTasksForToday] = useState<TaskType[]>([]);
+  const [tasksForToday, setTasksForToday] = useState<Array<TaskType>>([]);
 
   const [isShowTaskModalVisible, setIsShowTaskModalVisible] =
     useState<boolean>(false);
@@ -60,7 +65,7 @@ const Home = ({ navigation }: Props): JSX.Element => {
     <Layout
       width={width}
       headerTitle={`Welcome ${user?.name}`}
-      headerSubtitle={`You have ${tasksForToday.length} tasks left for today.`}
+      headerSubtitle={`You have ${tasksForToday} tasks left for today.`}
       fillBackground
       actionButtonOnPress={() => setIsShowTaskModalVisible(true)}
     >
@@ -75,7 +80,7 @@ const Home = ({ navigation }: Props): JSX.Element => {
             New Task
           </Text>
           <TextInput
-            label="Tittle"
+            label="Title"
             icon="account"
             placeholder="John"
             cursorColor="#000000"
@@ -83,8 +88,19 @@ const Home = ({ navigation }: Props): JSX.Element => {
           />
         </View>
       </Modal>
-      <View style={{ flex: 1 }}>
-        <Text>home</Text>
+      <View style={styles.tasksWrapper}>
+        {tasksForToday.map((task, index) => (
+          <Card
+            customStyle={
+              (styles.taskCard,
+              index !== 0 ? { marginTop: spacing.md } : undefined)
+            }
+            backgroundColor="bgWhite"
+            key={task.id}
+          >
+            <Text>{task.title}</Text>
+          </Card>
+        ))}
       </View>
     </Layout>
   );

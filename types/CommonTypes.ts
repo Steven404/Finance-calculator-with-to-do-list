@@ -9,7 +9,7 @@ export interface AllTypesType {
 export const AllTypes = {
   task: 'TaskType',
   user: 'UserType',
-};
+} as const;
 
 export type RootStackParamList = {
   Home: undefined;

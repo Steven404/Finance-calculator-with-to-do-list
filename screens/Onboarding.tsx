@@ -10,13 +10,16 @@ import {
 import Toast from 'react-native-toast-message';
 import uuid from 'react-native-uuid';
 
-import { getExampleTasks } from '../commonData/exampleTasks';
 import { onboardingScreens } from '../commonData/onboardingItemsList';
 import Card from '../components/card/Card';
 import OnboardingItem from '../components/onboardingItem/OnboardingItem';
 import Text from '../components/text/Text';
 import TextInput from '../components/textInput/TextInput';
-import { showErrorToast, storeObject } from '../modules/common';
+import {
+  getExampleTasks,
+  showErrorToast,
+  storeObject,
+} from '../modules/common';
 import { primaryButton } from '../styles/buttons';
 import { colors, spacing } from '../theme';
 import { RootStackParamList } from '../types/CommonTypes';

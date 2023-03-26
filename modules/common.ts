@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
+import uuid from 'react-native-uuid';
 
 import { AllTypes, AllTypesType } from '../types/CommonTypes';
+import { TaskType } from '../types/TaskTypes';
 
 export const storeString = async (key: string, value: string) => {
   await AsyncStorage.setItem(key, value);
@@ -34,3 +36,20 @@ export const showErrorToast = (message: string, header = 'Error') =>
     text2: message,
     type: 'error',
   });
+
+export const getExampleTasks = (
+  userId: string,
+  number: number
+): Array<TaskType> => {
+  const result: TaskType[] = [];
+  for (let i = 0; i < number; i += 1) {
+    result.push({
+      id: uuid.v1() as string,
+      remindAt: new Date().getTime(),
+      summary: `This is an example task (${i + 1})`,
+      title: `Example task ${i + 1}`,
+      userId,
+    });
+  }
+  return result;
+};

@@ -8,18 +8,14 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
-import uuid from 'react-native-uuid';
 
 import { onboardingScreens } from '../commonData/onboardingItemsList';
 import Card from '../components/card/Card';
 import OnboardingItem from '../components/onboardingItem/OnboardingItem';
 import Text from '../components/text/Text';
 import TextInput from '../components/textInput/TextInput';
-import {
-  getExampleTasks,
-  showErrorToast,
-  storeObject,
-} from '../modules/common';
+import { showErrorToast } from '../modules/common';
+import useUser from '../modules/useUser';
 import { primaryButton } from '../styles/buttons';
 import { colors, spacing } from '../theme';
 import { RootStackParamList } from '../types/CommonTypes';
@@ -77,21 +73,18 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
 
   const flatListRef = useRef<FlatList>(null);
 
+  const { createUser } = useUser();
+
   const isLastSlide =
     Math.round(currentSlideOffsetX) === onboardingScreens.length - 1;
 
-  const createUser = async (): Promise<void> => {
+  const handleCreateUser = async (): Promise<void> => {
     if (!name.length) {
       setHasNameInputError(true);
       showErrorToast('Please enter a name');
       return;
     }
-    const newUserId = uuid.v4() as string;
-    await storeObject('user', {
-      id: newUserId,
-      name,
-      tasks: getExampleTasks(newUserId, 3),
-    });
+    createUser(name);
     navigation.push('Home');
   };
 
@@ -115,7 +108,11 @@ const Onboarding = ({ navigation }: Props): JSX.Element => {
             }}
             error={hasNameInputError ? 'Please enter a name' : ''}
           />
-          <Card shadow customStyle={{ ...primaryButton }} onPress={createUser}>
+          <Card
+            shadow
+            customStyle={{ ...primaryButton }}
+            onPress={handleCreateUser}
+          >
             <Text size="xl" color="white">
               Save
             </Text>

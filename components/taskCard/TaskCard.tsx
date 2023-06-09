@@ -14,18 +14,25 @@ interface TaskCardPropsType {
 }
 
 const styles = StyleSheet.create({
-  taskCardDetailsRow: { flexDirection: 'row', paddingTop: spacing.xs },
-  taskCardTitleWrapper: {
+  detailsRow: { flexDirection: 'row' },
+  detailsWrapper: {
+    display: 'flex',
+  },
+  titleWrapper: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flex: 1,
     width: '100%',
   },
   wrapper: {
     borderRadius: borderRadius.md,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
+    paddingVertical: spacing.md,
   },
 });
 
@@ -40,7 +47,7 @@ const TaskCard = ({ customStyle, task }: TaskCardPropsType) => {
       key={task.id}
       shadow
     >
-      <View style={styles.taskCardTitleWrapper}>
+      <View style={styles.titleWrapper}>
         <Text size="xl" color="textGray" weight="500">
           {task.title}
         </Text>
@@ -50,24 +57,24 @@ const TaskCard = ({ customStyle, task }: TaskCardPropsType) => {
           color={colors.textGray}
         />
       </View>
-      <View>
-        <View style={styles.taskCardDetailsRow}>
-          <Text color="textGrayLight" weight="600" size="sm">
+      <View style={styles.detailsWrapper}>
+        <View style={styles.detailsRow}>
+          <Text color="textGrayLight" weight="400" size="sm">
             Summary: &nbsp;
           </Text>
-          <Text color="textGrayLight" size="sm">
+          <Text weight="600" color="textGrayLight" size="sm">
             {task.summary}
           </Text>
         </View>
-        <View style={styles.taskCardDetailsRow}>
-          <Text color="textGrayLight" weight="600" size="sm">
+        <View style={styles.detailsRow}>
+          <Text color="textGrayLight" size="sm">
             Reminder set at: &nbsp;
           </Text>
-          <Text color="textGrayLight" size="sm">
+          <Text weight="600" color="textGrayLight" size="sm">
             {formatDate(task.remindAt, true)}
           </Text>
         </View>
-        <View style={styles.taskCardDetailsRow}>
+        <View style={styles.detailsRow}>
           <Text color="textGrayLight" weight="600" size="sm">
             Completed at: &nbsp;
           </Text>
